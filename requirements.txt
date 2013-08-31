@@ -1,0 +1,2 @@
+Django==1.5.2
+django-admin-sortable==1.5.3
