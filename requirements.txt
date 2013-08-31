@@ -1,2 +1,5 @@
 Django==1.5.2
+distribute==0.6.34
 django-admin-sortable==1.5.3
+ipython==1.0.0
+wsgiref==0.1.2
