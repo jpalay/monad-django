@@ -2,3 +2,4 @@
 *.py[oc]
 *.db
 local_settings.py
+venv
