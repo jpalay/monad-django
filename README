@@ -1,0 +1,4 @@
+monad
+=====
+
+Copy monad/sample_local_settings.py to monad/local_settings.py
