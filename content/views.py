@@ -10,10 +10,18 @@ def home(request):
 
 @login_required
 def display_all(request):
-	pages = Page.objects.all().order_by('order')
-	render_to_response("display_all.html", pages)
+	pages = Page.objects.all()
+	context = {'pages': pages}
+	return render_to_response("display_all.html", context)
 
 @login_required
 def display_one(request, slug):
-	page = Page.objects.filter(slug=slug)[0]
-	render_to_response("display_one.html", page)
+	page = Page.objects.get(slug=slug)
+	next_page = Page.objects.get(order=page.order + 1)
+	previous_page = Page.objects.get(order=page.order - 1)
+	context = {
+		"page": page,
+		"next_page": next_page,
+		"previous_page": previous_page,
+	}
+	return render_to_response("display_one.html", context)
