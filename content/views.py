@@ -15,8 +15,12 @@ def display_all(request):
 	return render_to_response("display_all.html", context)
 
 @login_required
-def display_one(request, slug):
-	page = Page.objects.get(slug=slug)
+def display_page(request, slug):
+	# if you enter the "order" of the page, it should still work
+	if slug.isdigit():
+		page = Page.objects.get(order=slug)
+	else:
+		page = Page.objects.get(slug=slug)
 	next_page = Page.objects.get(order=page.order + 1)
 	previous_page = Page.objects.get(order=page.order - 1)
 	context = {
