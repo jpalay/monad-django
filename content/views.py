@@ -3,6 +3,7 @@
 from content.models import *
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
 
 
 def home(request):
@@ -12,7 +13,7 @@ def home(request):
 def display_all(request):
 	pages = Page.objects.all()
 	context = {'pages': pages}
-	return render_to_response("display_all.html", context)
+	return render_to_response("display_all.html", RequestContext(request, context))
 
 @login_required
 def display_page(request, slug):
@@ -54,4 +55,4 @@ def display_page(request, slug):
 		"previous_page": previous_page,
 		"media": media,
 	}
-	return render_to_response("display_one.html", context)
+	return render_to_response("display_one.html", RequestContext(request, context))

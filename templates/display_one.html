@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>30 Reasons</title>
-  <link rel="stylesheet" type="text/css" href="{{ STATCI_URL }}display_one.css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}display_one.css">
 </head>
 
 <body>
@@ -18,12 +18,12 @@
     <h3>{{ number }}. {{ page.title }}</h3>
     
     {% for medium in media %}
-    {% if media.type == "IMAGE" %}
-      <p class="image">{{ medium.render }}</p>
-    {% else %}
-    {{ medium.render }}
-    {% endif %}
-      
+        {% if media.type == "IMAGE" %}
+        <p class="image">{{ medium.render }}</p>
+        {% else %}
+        {{ medium.render }}
+        {% endif %}
+    
     {% endfor %}
     
     <p>{{ page.text }}<p>

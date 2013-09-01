@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 from adminsortable.models import Sortable
 
 class Page(Sortable):
@@ -33,6 +34,6 @@ class Media(models.Model):
     
     def render(self):
         if self.media_type == "IMAGE":
-            return '<img src="{0}">'.format(self.identifier)
+            return mark_safe('<img src="{0}">'.format(self.identifier))
         elif self.media_type == "VIDEO":
             return '<iframe width="420" height="315" src="//www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'.format(self.identifier)
