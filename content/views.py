@@ -17,12 +17,27 @@ def display_all(request):
 @login_required
 def display_page(request, slug):
 	# if you enter the "order" of the page, it should still work
+	pages = Page.objects.all()
 	if slug.isdigit():
-		page = Page.objects.get(order=slug)
+		if slug > 0:
+			index = int(slug) - 1
+			page = pages[index]
 	else:
-		page = Page.objects.get(slug=slug)
-	next_page = Page.objects.get(order=page.order + 1)
-	previous_page = Page.objects.get(order=page.order - 1)
+		for i, a_page in enumerate(pages):
+			if a_page.slug == slug:
+				index = i
+				page = a_page
+				break
+	try:
+		next_page = page[index + 1]
+	except IndexError:
+		next_page = None
+
+	try:
+		previous_page = page[index - 1]
+	except IndexError:
+		previous_page = None
+
 	context = {
 		"page": page,
 		"next_page": next_page,
