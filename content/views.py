@@ -1,7 +1,7 @@
 # Create your views here.
 
 from content.models import *
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 
 
@@ -17,6 +17,7 @@ def display_all(request):
 @login_required
 def display_page(request, slug):
 	# if you enter the "order" of the page, it should still work
+	page = None
 	pages = Page.objects.all()
 	if slug.isdigit():
 		if slug > 0:
@@ -28,18 +29,26 @@ def display_page(request, slug):
 				index = i
 				page = a_page
 				break
-	try:
-		next_page = page[index + 1]
-	except IndexError:
-		next_page = None
+		if page is None:
+			return redirect('/')
 
-	try:
-		previous_page = page[index - 1]
-	except IndexError:
-		previous_page = None
+	
+	previous_page = None
+	next_page = None
+	if index > 0:
+		try:
+			previous_page = pages[index - 1]
+		except IndexError, AssertionError:
+			previous_page = None
+
+		try:
+			next_page = pages[index + 1]
+		except IndexError, AssertionError:
+			next_page = None
 
 	context = {
 		"page": page,
+		"number": index + 1,
 		"next_page": next_page,
 		"previous_page": previous_page,
 	}

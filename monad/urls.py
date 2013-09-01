@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from content.views import display_page
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {
     	'template_name': 'login.html'
     }),
+    url(r'^(?P<slug>.+)/$', 'content.views.display_page', name="display_page"),
 )
