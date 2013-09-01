@@ -32,7 +32,7 @@ class Media(models.Model):
         return self.identifier
     
     def render(self):
-        if self.media_type == IMAGE:
+        if self.media_type == "IMAGE":
             return '<img src="{0}">'.format(self.identifier)
-        elif self.media_type == VIDEO:
+        elif self.media_type == "VIDEO":
             return '<iframe width="420" height="315" src="//www.youtube.com/embed/{0}" frameborder="0" allowfullscreen></iframe>'.format(self.identifier)

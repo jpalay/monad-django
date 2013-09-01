@@ -34,22 +34,24 @@ def display_page(request, slug):
 
 	
 	previous_page = None
-	next_page = None
 	if index > 0:
 		try:
 			previous_page = pages[index - 1]
 		except IndexError, AssertionError:
 			previous_page = None
 
-		try:
-			next_page = pages[index + 1]
-		except IndexError, AssertionError:
-			next_page = None
+	try:
+		next_page = pages[index + 1]
+	except IndexError:
+		next_page = None
+
+	media = Media.objects.filter(page=page)
 
 	context = {
 		"page": page,
 		"number": index + 1,
 		"next_page": next_page,
 		"previous_page": previous_page,
+		"media": media,
 	}
 	return render_to_response("display_one.html", context)

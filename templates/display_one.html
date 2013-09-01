@@ -96,8 +96,15 @@
 
   <div class="reason-container cf">
     <h3>{{ number }}. {{ page.title }}</h3>
-
-    <p class="image"><img src="/Users/annekainic/Dropbox/work/bandl/bellanotte.jpeg"></p>
+    
+    {% for medium in media %}
+    {% if media.type == "IMAGE" %}
+      <p class="image">{{ medium.render }}</p>
+    {% else %}
+    {{ medium.render }}
+    {% endif %}
+      
+    {% endfor %}
     
     <p>{{ page.text }}<p>
     {% if next_page %}
