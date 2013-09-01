@@ -1,1 +1,1 @@
-web: gunicorn monad-django.wsgi
+web: gunicorn monad.wsgi
