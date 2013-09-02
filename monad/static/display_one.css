@@ -33,6 +33,7 @@ body {
   .image img {
     box-shadow: 7px 7px 4px darkgray;
     margin: 20px;
+    max-width: 600px;
   }
 
   .button-next {

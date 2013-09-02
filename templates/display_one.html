@@ -18,8 +18,8 @@
     <h3>{{ number }}. {{ page.title }}</h3>
     
     {% for medium in media %}
-        {% if media.type == "IMAGE" %}
-        <p class="image">{{ medium.render }}</p>
+        {% if medium.media_type == "IMAGE" %}
+        <span class="image">{{ medium.render }}</span>
         {% else %}
         {{ medium.render }}
         {% endif %}
